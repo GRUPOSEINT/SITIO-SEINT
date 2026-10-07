@@ -1,0 +1,33 @@
+---
+// Lockup de grupo con el endoso de 17 años (geometría del componente Lockup del sistema de diseño).
+interface Props { tone?: 'light' | 'white' | 'navy' | 'teal'; height?: number; class?: string }
+const { tone = 'light', height = 40, class: cls } = Astro.props;
+const ART = { light: 'logo-grupo-seint-degradado.png', white: 'logo-grupo-seint-white.png', navy: 'logo-grupo-seint-navy.png', teal: 'logo-grupo-seint-teal.png' };
+const ASPECT = 3.1795;
+const h = height;
+const w = +(h * ASPECT).toFixed(2);
+const rule = tone === 'white' ? '#fff' : tone === 'light' ? 'var(--teal-500)' : 'currentColor';
+const label = tone === 'white' ? '#fff' : 'var(--navy-500)';
+---
+<div class:list={['lockup', cls]} style={`--h:${h}px;--w:${w}px`}>
+  <img src={`/assets/${ART[tone]}`} alt="Grupo Empresarial SEINT — 17 años de bienestar" width={w} height={h} class="lockup-art" />
+  <div class="lockup-endorse">
+    <div class="lockup-rule" style={`background:${rule}`}></div>
+    <div class="lockup-row">
+      {tone === 'light'
+        ? <img src="/assets/endoso-17.png" alt="17" class="lockup-num" />
+        : <span class="lockup-num-txt" style={`color:${tone === 'white' ? '#fff' : 'var(--navy-500)'}`}>17</span>}
+      <span class="lockup-label" style={`color:${label}`}>Años de bienestar</span>
+    </div>
+  </div>
+</div>
+<style>
+  .lockup { display: inline-block; }
+  .lockup-art { display: block; height: var(--h); width: var(--w); }
+  .lockup-endorse { width: var(--w); }
+  .lockup-rule { height: max(2px, calc(var(--h) * .029)); margin-top: calc(var(--h) * .157); }
+  .lockup-row { display: flex; align-items: flex-end; justify-content: center; gap: calc(var(--h) * .108); margin-top: calc(var(--h) * .157); }
+  .lockup-num { display: block; height: calc(var(--h) * .392); width: auto; }
+  .lockup-num-txt { font-family: var(--font-display); font-weight: 800; font-style: italic; font-size: calc(var(--h) * .524); line-height: .75; letter-spacing: -.02em; }
+  .lockup-label { font-family: var(--font-display); font-weight: 700; font-size: calc(var(--h) * .205); line-height: 1.18; letter-spacing: .13em; text-transform: uppercase; white-space: nowrap; }
+</style>

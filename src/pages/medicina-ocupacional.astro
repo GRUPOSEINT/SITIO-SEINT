@@ -1,0 +1,110 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Photo from '../components/Photo.astro';
+import { cotizarHref } from '../data/sitio';
+
+const condiciones = [
+  ['Para qué exámenes aplica', 'Exámenes de laboratorio del perfil ocupacional básico: cuadro hemático, glicemia, perfil lipídico, parcial de orina, coprológico, frotis de garganta, KOH y prueba de drogas en orina. También realizamos pruebas de embarazo.'],
+  ['Desde cuándo cuenta', 'Desde la toma de la muestra, no desde la llegada del trabajador a la sede.'],
+  ['En qué horario', 'Lunes a sábado, muestras tomadas entre 6:00 a.m. y 10:00 a.m., sede Bogotá.'],
+  ['Qué queda por fuera', 'Pruebas especializadas y de referencia, que tienen su propio tiempo de entrega y se informan al cotizar.'],
+];
+const momentos = [
+  ['01', 'Examen de ingreso', 'Antes de empezar. Define si la persona es apta para el cargo según su profesiograma.'],
+  ['02', 'Examen periódico', 'Durante el vínculo, con la frecuencia que exige el profesiograma del cargo.'],
+  ['03', 'Examen de egreso', 'Al terminar. Deja registro del estado de salud a la salida.'],
+];
+---
+<Base
+  title="Exámenes médicos ocupacionales en Bogotá · Laboratorio propio, resultados en 3 horas · SEINT"
+  description="Exámenes de ingreso, periódicos y de egreso con el profesiograma de cada cargo. Laboratorio clínico propio: resultados en 3 horas, lunes a sábado, muestras de 6:00 a 10:00 a.m."
+>
+<main class="theme-salud">
+  <section class="ihero px">
+    <div class="container">
+      <a href="/" style="color:#fff;font-size:14px">← Inicio</a>
+      <div class="overline" style="color:var(--teal-100,#D9FBF8);margin-top:20px"><span>IPS · Res. 2346 de 2007</span></div>
+      <h1 class="display ihero-h1">Medicina ocupacional con laboratorio clínico propio</h1>
+      <p class="ihero-p">Exámenes médicos ocupacionales de ingreso, periódicos y de egreso, con el profesiograma definido por el cargo y su riesgo. El laboratorio está en nuestra sede: la muestra no sale a un tercero.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
+        <Button variant="inverse" size="lg" href={cotizarHref('Medicina ocupacional — Exámenes')}>Cotizar exámenes</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="px" style="padding-top:clamp(32px,4vw,64px);padding-bottom:clamp(32px,4vw,64px)">
+    <div class="container grid-auto lab">
+      <div>
+        <div class="tres"><span class="tres-n"><span style="font-size:32px;line-height:1">3</span><span style="font-size:16px">horas</span></span><span class="label">Tiempo de entrega</span></div>
+        <h2 class="display lab-h2">Resultados de laboratorio el mismo día</h2>
+        <p style="margin:0;font-size:17px;line-height:1.6">Cuando una empresa necesita vincular personal con urgencia, el tiempo de respuesta pesa tanto como el precio. Por eso te decimos cuánto tardan los resultados y qué condiciones aplican.</p>
+      </div>
+      <Photo class="lab-photo" placeholder="Foto: laboratorio clínico de la sede (vertical)" />
+      <div class="lab-card">
+        <div class="grid-auto lab-card-grid">
+          {condiciones.map(([k, v], i) => (
+            <div class:list={['cond', i < 2 && 'cond--top']}>
+              <div class="label">{k}</div>
+              <div style="font-size:15px;margin-top:6px">{v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px" style="background:var(--surface-subtle);padding-top:clamp(32px,4vw,64px);padding-bottom:clamp(32px,4vw,64px)">
+    <div class="container">
+      <div class="overline"><span>Res. 2346 de 2007</span></div>
+      <h2 class="display" style="font-size:clamp(24px,3vw,34px);margin:24px 0 8px;letter-spacing:0;line-height:1.2">Los 3 momentos del examen</h2>
+      <p style="margin:0 0 32px;font-size:17px;max-width:60ch">No todos los exámenes ocupacionales son iguales. Cuál pedir y con qué pruebas lo define el cargo y su profesiograma, no el precio.</p>
+      <div class="grid-auto" style="--min:260px;gap:20px">
+        {momentos.map(([n, t, d]) => (
+          <Card padding="24px" topRule>
+            <div style="font-family:var(--font-display);font-weight:800;font-size:36px;color:var(--brand-primary);line-height:1">{n}</div>
+            <h3 class="h3" style="margin:12px 0 6px">{t}</h3>
+            <p style="margin:0;font-size:15px">{d}</p>
+          </Card>
+        ))}
+      </div>
+      <div class="grid-auto" style="--min:260px;gap:20px;margin-top:32px">
+        <Card surface="brand" padding="24px">
+          <h3 class="h3" style="font-size:22px;margin:0 0 8px;color:#fff">¿Estás pidiendo el examen correcto?</h3>
+          <p style="margin:0;font-size:15px;color:#fff">Mándanos los cargos de tu empresa. Revisamos su profesiograma y te decimos qué falta y qué sobra, antes de cotizar.</p>
+          <div style="margin-top:16px"><Button variant="inverse" size="sm" href={cotizarHref('Revisión de profesiograma por cargo')}>Pedir revisión</Button></div>
+        </Card>
+        <Card padding="24px">
+          <h3 class="h3" style="margin:0 0 8px">Agendamiento de citas</h3>
+          <p style="margin:0;font-size:15px">Esta versión del sitio no agenda citas médicas ni recoge información de salud. Coordinamos la programación con tu área de talento humano después de la cotización.</p>
+        </Card>
+      </div>
+    </div>
+  </section>
+</main>
+</Base>
+<style>
+  .ihero { background: var(--surface-brand-strong); color: #fff; padding-top: clamp(36px,5vw,72px); padding-bottom: clamp(36px,5vw,72px); }
+  .ihero-h1 { color: #fff; font-size: clamp(30px,5vw,54px); line-height: 1.06; margin: 24px 0 0; max-width: 26ch; letter-spacing: 0; }
+  .ihero-p { font-size: clamp(16px,2vw,20px); line-height: 1.6; max-width: 56ch; margin: 20px 0 0; color: #fff; }
+  .tres { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 20px; padding: 10px 20px 10px 12px; border-radius: 999px; background: var(--teal-50); }
+  .tres-n { display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 18px; border-radius: 999px; background: var(--navy-500); color: #fff; font-family: var(--font-display); font-weight: 800; }
+  .lab-h2 { font-size: clamp(26px,3.4vw,38px); line-height: 1.1; margin: 0 0 16px; letter-spacing: 0; }
+
+  /* Celular y tablet: foto 4:3 junto al texto (o debajo en celular) y la tarjeta de condiciones a todo el ancho. */
+  .lab { gap: clamp(24px,3vw,48px); align-items: stretch; }
+  .lab :global(.lab-photo) { aspect-ratio: 4/3; width: 100%; max-width: 560px; justify-self: center; align-self: start; }
+  .lab-card { grid-column: 1 / -1; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; }
+  .lab-card-grid { --min: 300px; }
+  .cond { padding: 18px 20px; }
+  .cond--top { border-bottom: 1px solid var(--border-subtle); }
+
+  /* Computador: texto y tarjeta a la izquierda, foto a la derecha a todo el alto. */
+  @media (min-width: 1100px) {
+    .lab { grid-template-columns: 1fr 1fr; row-gap: 0; }
+    .lab :global(.lab-photo) { grid-column: 2; grid-row: 1 / span 2; aspect-ratio: auto; min-height: clamp(260px,70vw,420px); max-width: none; align-self: stretch; }
+    .lab-card { grid-column: 1; margin-top: 24px; }
+    .lab-card-grid { --min: 220px; }
+  }
+</style>

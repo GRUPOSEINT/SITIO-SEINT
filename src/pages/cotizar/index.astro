@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { SERVICIOS, SITIO, waHref } from '../../data/sitio';
+const AUTORIZACION = `Autorizo a SEINT SAS el tratamiento de mis datos personales para responder esta solicitud, contactarme por correo, teléfono o WhatsApp y enviarme información de los servicios que pedí. Puedo consultar, actualizar o suprimir mis datos escribiendo a ${SITIO.correo}.`;
+---
+<Base title="Pedir cotización · Grupo Empresarial SEINT" description="Te respondemos en menos de 4 horas hábiles con precio, duración y fechas disponibles. Formulario para empresas y para personas independientes.">
+<main class="theme-formacion px" style="padding-top:clamp(32px,4vw,64px);padding-bottom:clamp(32px,4vw,64px)">
+  <div style="max-width:880px;margin:0 auto">
+    <a href="/" style="font-size:14px">← Inicio</a>
+    <h1 class="display" style="font-size:clamp(28px,4vw,42px);line-height:1.08;margin:20px 0 8px;letter-spacing:0">Pedir cotización</h1>
+    <p style="margin:0 0 28px;font-size:17px;max-width:56ch">Te respondemos en menos de 4 horas hábiles con precio, duración y fechas disponibles. No cobramos ni inscribimos desde el sitio.</p>
+
+    <div class="tipo" role="group" aria-label="Tipo de solicitud">
+      <button type="button" data-tipo="empresa" aria-pressed="true">Soy una empresa</button>
+      <button type="button" data-tipo="persona" aria-pressed="false">Soy independiente</button>
+    </div>
+    <p class="tipo-nota" data-nota="empresa">Formulario de empresa: pedimos razón social y número de personas para cotizar el grupo.</p>
+    <p class="tipo-nota" data-nota="persona" hidden>Formulario de persona independiente: no te pedimos empresa ni número de trabajadores. Certificamos a personas por su cuenta.</p>
+
+    <form name="cotizacion" method="POST" action="/cotizar/gracias" data-netlify="true" netlify-honeypot="empresa_web" novalidate class="grid-auto form" style="--min:240px" data-form>
+      <input type="hidden" name="form-name" value="cotizacion" />
+      <input type="hidden" name="tipo" value="empresa" />
+      <input type="hidden" name="radicado" value="" />
+      <input type="hidden" name="autorizacion_fecha" value="" />
+      <input type="hidden" name="autorizacion_texto" value={AUTORIZACION} />
+      <p class="hp" aria-hidden="true"><label>No llenar este campo <input name="empresa_web" tabindex="-1" autocomplete="off" /></label></p>
+
+      <div class="field" data-field="nombre">
+        <label for="f-nombre">Nombre y apellido<span class="req"> *</span></label>
+        <input id="f-nombre" name="nombre" autocomplete="name" placeholder="Como aparece en el certificado" required />
+        <span class="msg" id="e-nombre"></span>
+      </div>
+      <div class="field" data-field="empresa" data-solo="empresa">
+        <label for="f-empresa">Empresa<span class="req"> *</span></label>
+        <input id="f-empresa" name="empresa" autocomplete="organization" placeholder="Razón social" required />
+        <span class="msg" id="e-empresa"></span>
+      </div>
+      <div class="field" data-field="correo">
+        <label for="f-correo">Correo<span class="req"> *</span></label>
+        <input id="f-correo" name="correo" type="email" autocomplete="email" inputmode="email" placeholder="nombre@empresa.com" required />
+        <span class="msg" id="e-correo"></span>
+      </div>
+      <div class="field" data-field="telefono">
+        <label for="f-telefono">Teléfono o celular<span class="req"> *</span></label>
+        <input id="f-telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" placeholder="316 000 0000" required />
+        <span class="msg" id="e-telefono"></span>
+      </div>
+      <div class="field" data-field="personas" data-solo="empresa">
+        <label for="f-personas">¿Cuántas personas?<span class="req"> *</span></label>
+        <input id="f-personas" name="personas" type="number" min="1" inputmode="numeric" placeholder="Ej. 12" required />
+        <span class="msg" id="e-personas"></span>
+      </div>
+      <div class="field" data-field="ciudad" data-solo="persona" hidden>
+        <label for="f-ciudad">Ciudad</label>
+        <input id="f-ciudad" name="ciudad" autocomplete="address-level2" placeholder="Bogotá" disabled />
+        <span class="msg"></span>
+      </div>
+      <div class="field" style="grid-column:1/-1">
+        <label for="f-servicio">Servicio de interés</label>
+        <select id="f-servicio" name="servicio">
+          <option value="">Selecciona…</option>
+          {SERVICIOS.map((s) => <option value={s}>{s}</option>)}
+        </select>
+        <span class="msg">Viene precargado si llegaste desde un curso o servicio.</span>
+      </div>
+
+      <div class="autoriza" style="grid-column:1/-1" data-field="autoriza">
+        <label class="check">
+          <input type="checkbox" name="autoriza" value="si" required />
+          <span>{AUTORIZACION}</span>
+        </label>
+        <p style="font-size:13px;color:var(--text-muted);margin:12px 0 0">Ley 1581 de 2012. Responsable: SEINT SAS, Carrera 69 No 24-65 sur, Bogotá. Consulta la <a href="/politica-de-datos" target="_blank">política de tratamiento de datos</a>.</p>
+        <p class="autoriza-err" id="e-autoriza" hidden></p>
+      </div>
+
+      <div class="envio-err" style="grid-column:1/-1" role="alert" data-envio-err hidden>
+        <strong>No pudimos enviar tu solicitud.</strong> Tus datos siguen en el formulario: inténtalo de nuevo o escríbenos por <a href={waHref()} target="_blank" rel="noopener" data-wa>WhatsApp {SITIO.telComercial}</a> o a <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>.
+      </div>
+
+      <div style="grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <button type="submit" class="btn btn--secondary btn--lg" data-submit>Enviar solicitud</button>
+        <a href={waHref()} target="_blank" rel="noopener" class="wa-out" data-wa><Icon name="message-circle" size={18} /> Prefiero WhatsApp</a>
+      </div>
+    </form>
+  </div>
+</main>
+</Base>
+
+<script>
+  import { initCotizar } from '../../scripts/cotizar';
+  initCotizar();
+</script>
+
+<style>
+  .tipo { display: flex; gap: 8px; background: var(--surface-subtle); padding: 6px; border-radius: 999px; width: fit-content; max-width: 100%; flex-wrap: wrap; }
+  .tipo button { height: 44px; padding: 0 22px; border-radius: 999px; border: none; cursor: pointer; font-family: var(--font-core); font-weight: 600; font-size: 15px; background: transparent; color: var(--navy-500); transition: var(--transition-control); }
+  .tipo button[aria-pressed="true"] { background: var(--navy-500); color: #fff; }
+  .tipo-nota { font-size: 15px; color: var(--text-muted); margin: 16px 0 0; }
+  .form { margin-top: 28px; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: var(--space-2); }
+  .field[hidden] { display: none; }
+  .field label { font-size: var(--size-small); font-weight: var(--weight-semibold); color: var(--navy-500); }
+  .req { color: var(--teal-600); }
+  .field input, .field select { height: var(--field-height); padding: 0 var(--space-4); border-radius: var(--radius-md); border: 1px solid var(--border-default); background: var(--white); font-family: var(--font-core); font-size: var(--size-body); color: var(--navy-500); outline: none; transition: var(--transition-control); width: 100%; min-width: 0; }
+  .field input:focus, .field select:focus { border-color: var(--teal-400); box-shadow: var(--ring-focus); }
+  .field input::placeholder { color: var(--gray-400); }
+  .field.err input { border-color: var(--danger); }
+  .msg { font-size: var(--size-caption); color: var(--text-muted); }
+  .msg:empty { display: none; }
+  .field.err .msg { color: var(--danger); }
+  .autoriza { border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; }
+  .check { display: flex; gap: var(--space-3); align-items: flex-start; cursor: pointer; }
+  .check span { font-size: var(--size-body); color: var(--navy-500); }
+  .check input { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; border-radius: var(--radius-xs); border: 2px solid var(--border-default); background: var(--white) no-repeat center / 14px; cursor: inherit; transition: var(--transition-control); }
+  .check input:checked { border-color: var(--teal-500); background-color: var(--teal-500); background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>"); }
+  .check input:focus-visible { box-shadow: var(--ring-focus); }
+  .autoriza-err { font-size: 14px; color: var(--danger); margin: 12px 0 0; font-weight: 600; }
+  .envio-err { background: #FBECEC; border-left: 3px solid var(--danger); border-radius: var(--radius-md); padding: 16px 20px; font-size: 15px; color: #8C2422; }
+  .envio-err[hidden] { display: none; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .wa-out { display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 22px; border-radius: 999px; border: 2px solid var(--navy-500); color: var(--navy-500); font-weight: 600; transition: var(--transition-control); }
+  .wa-out:hover { background: var(--navy-500); color: #fff; text-decoration: none; }
+  [data-submit][disabled] { opacity: .6; pointer-events: none; }
+</style>

@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import Icon from '../components/Icon.astro';
+import { SITIO, LINKS, waHref } from '../data/sitio';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+const { title, description, image = '/assets/logo-grupo-seint-degradado.png', type = 'website', noindex = false, jsonLd } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+
+// Datos estructurados para Google Business Profile. Nombre, dirección y teléfono
+// deben coincidir exactamente con el perfil. Falta agregar a `sameAs` la URL del perfil
+// y el horario de atención cuando SEINT los confirme.
+const direccion = { '@type': 'PostalAddress', streetAddress: 'Cra. 69 No 24-65 sur', addressLocality: 'Bogotá', addressRegion: 'Bogotá D.C.', addressCountry: 'CO' };
+const sameAs = [LINKS.instagram, LINKS.tiktok, LINKS.youtube, LINKS.linkedin];
+const org = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'MedicalClinic', '@id': `${SITIO.url}/#ips`, name: `${SITIO.nombre} — IPS`, url: `${SITIO.url}/medicina-ocupacional`, telephone: SITIO.telFijoE164, email: SITIO.correo, address: direccion, medicalSpecialty: 'OccupationalHealth', sameAs },
+    { '@type': 'EducationalOrganization', '@id': `${SITIO.url}/#formacion`, name: `${SITIO.nombre} — Centro de formación`, url: SITIO.url, telephone: SITIO.telComercialE164, email: SITIO.correo, address: direccion, sameAs },
+  ],
+};
+---
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content={SITIO.nombre} />
+  <meta property="og:locale" content="es_CO" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0D145C" />
+  <link rel="icon" type="image/png" href="/assets/isotipo-1.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap" />
+  <script type="application/ld+json" set:html={JSON.stringify(org)} />
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  <script is:inline>
+    // Invitaciones y recuperación de clave del panel del blog: llegan a la portada con un token.
+    if (/(invite|recovery|confirmation|email_change)_token=/.test(location.hash)) location.replace('/admin/' + location.hash);
+  </script>
+</head>
+<body>
+  <div class="site">
+    <Header />
+    <slot />
+    <Footer />
+  </div>
+
+  <a href={waHref()} target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" class="wa-float" data-wa>
+    <Icon name="message-circle" size={22} />
+    <span class="hide-mobile" style="padding-right:5px">WhatsApp</span>
+  </a>
+
+  <CookieBanner />
+</body>
+</html>
+<style>
+  .wa-float { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: inline-flex; align-items: center; gap: 10px; height: 56px; min-width: 56px; justify-content: center; padding: 0 17px; border-radius: 999px; background: var(--teal-500); color: #fff; font-weight: 700; box-shadow: var(--shadow-lg); text-decoration: none; }
+  .wa-float:hover { color: #fff; text-decoration: none; background: var(--teal-600); }
+</style>

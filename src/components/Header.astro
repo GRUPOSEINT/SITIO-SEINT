@@ -1,0 +1,131 @@
+---
+import Icon from './Icon.astro';
+import Lockup from './Lockup.astro';
+import Button from './Button.astro';
+import { SITIO, LINKS, cotizarHref } from '../data/sitio';
+
+const nav = [
+  { href: '/trabajo-en-alturas', label: 'Trabajo en alturas' },
+  { href: '/espacios-confinados', label: 'Espacios confinados' },
+  { href: '/medicina-ocupacional', label: 'Medicina ocupacional', salud: true },
+  { href: '/blog', label: 'Blog' },
+];
+const accesos = [
+  { href: LINKS.certificado, label: 'Consulte su certificado TSA/EC', icon: 'file-check' },
+  { href: LINKS.empresasTsa, label: 'Ingreso empresas TSA/EC' },
+  { href: LINKS.empresasIps, label: 'Ingreso empresas IPS' },
+];
+---
+<div class="topbar">
+  <div class="container px topbar-in">
+    <span class="topbar-tel">
+      <Icon name="phone" size={14} />
+      <a href={`tel:${SITIO.telFijoE164}`}>{SITIO.telFijo}</a> · <a href={`tel:${SITIO.telComercialE164}`}>{SITIO.telComercial}</a>
+    </span>
+    {accesos.map((a) => (
+      <a class="only-wide topbar-link" href={a.href} target="_blank" rel="noopener">
+        {a.icon && <Icon name={a.icon} size={14} />}{a.label}
+      </a>
+    ))}
+    <a class="only-wide topbar-link" href="/pagos"><span class="breb">Pagos Bre-B - Llave</span></a>
+
+    <div class="only-tablet accesos" data-accesos>
+      <button type="button" class="accesos-btn" aria-expanded="false" aria-controls="accesos-menu" data-accesos-toggle>
+        Accesos <Icon name="chevron-down" size={14} class="ico-closed" /><Icon name="chevron-up" size={14} class="ico-open" />
+      </button>
+      <div id="accesos-menu" class="accesos-menu" hidden>
+        {accesos.map((a) => (
+          <a href={a.href} target="_blank" rel="noopener">{a.icon && <Icon name={a.icon} size={14} />} {a.label}</a>
+        ))}
+        <a href="/pagos"><span class="breb">Pagos Bre-B - Llave</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="container px header-in">
+    <a href="/" class="site-logo" aria-label="Grupo Empresarial SEINT, inicio"><Lockup tone="light" height={40} /></a>
+    <div class="header-right">
+      <nav class="hide-mobile header-nav" aria-label="Principal">
+        {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      </nav>
+      <Button size="sm" href={cotizarHref('Consulta general')}>Cotiza en 4 h</Button>
+      <button type="button" class="only-mobile menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil" data-menu-toggle>
+        <Icon name="menu" size={20} class="ico-closed" /><Icon name="x" size={20} class="ico-open" />
+      </button>
+    </div>
+  </div>
+  <nav id="menu-movil" class="only-mobile menu-movil px" aria-label="Menú" hidden>
+    {nav.map((n) => (
+      <a href={n.href} class="mm-main" style={n.salud ? 'color:var(--teal-700)' : undefined}>{n.label} <Icon name="arrow-right" size={18} /></a>
+    ))}
+    {accesos.map((a) => (
+      <a href={a.href} target="_blank" rel="noopener" class="mm-sub">{a.icon && <Icon name={a.icon} size={16} />} {a.label}</a>
+    ))}
+    <a href="/pagos" class="mm-sub mm-last"><span class="breb" style="color:var(--teal-700)">Pagos Bre-B - Llave</span></a>
+  </nav>
+</header>
+
+<script>
+  // Menú "Accesos" (tablet): abre y cierra con el botón; se cierra al tocar fuera o al navegar.
+  const acc = document.querySelector<HTMLElement>('[data-accesos]');
+  const accBtn = acc?.querySelector<HTMLButtonElement>('[data-accesos-toggle]');
+  const accMenu = acc?.querySelector<HTMLElement>('.accesos-menu');
+  const setAcc = (open: boolean) => {
+    if (!accBtn || !accMenu) return;
+    accBtn.setAttribute('aria-expanded', String(open));
+    accMenu.hidden = !open;
+  };
+  accBtn?.addEventListener('click', (e) => { e.stopPropagation(); setAcc(accMenu!.hidden); });
+  document.addEventListener('click', () => setAcc(false));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setAcc(false); setMenu(false); } });
+
+  // Menú celular: pantalla completa bajo el header, se cierra al navegar.
+  const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('menu-movil');
+  function setMenu(open: boolean) {
+    if (!menuBtn || !menu) return;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    menu.hidden = !open;
+  }
+  menuBtn?.addEventListener('click', () => setMenu(menu!.hidden));
+  menu?.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) setMenu(false); });
+  matchMedia('(min-width: 760px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+  window.addEventListener('pageshow', () => { setMenu(false); setAcc(false); });
+</script>
+
+<style>
+  .topbar { background: var(--navy-700, #070B33); color: #fff; }
+  .topbar-in { padding-top: 8px; padding-bottom: 8px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: flex-end; font-size: 13px; }
+  .topbar a { color: #fff; }
+  .topbar-tel { margin-right: auto; display: flex; align-items: center; gap: 8px; color: #fff; }
+  .topbar-link { display: flex; align-items: center; gap: 6px; }
+  .breb { color: var(--teal-300); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .accesos { position: relative; }
+  .accesos-btn { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+  .accesos-btn :global(.ico-open), .menu-btn :global(.ico-open) { display: none; }
+  .accesos-btn[aria-expanded="true"] :global(.ico-open), .menu-btn[aria-expanded="true"] :global(.ico-open) { display: inline-block; }
+  .accesos-btn[aria-expanded="true"] :global(.ico-closed), .menu-btn[aria-expanded="true"] :global(.ico-closed) { display: none; }
+  .accesos-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 80; width: 260px; background: var(--navy-700, #070B33); border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); overflow: hidden; }
+  .accesos-menu a { display: flex; align-items: center; gap: 8px; padding: 12px 16px; min-height: 44px; color: #fff; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .accesos-menu a:last-child { border-bottom: 0; }
+
+  .site-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle); }
+  .header-in { padding-top: 12px; padding-bottom: 12px; display: flex; gap: 16px; align-items: center; }
+  .site-logo { display: block; }
+  .site-logo:hover { text-decoration: none; }
+  @media (max-width: 759.98px) {
+    .site-logo :global(.lockup) { --h: 34px !important; --w: calc(34px * 3.1795) !important; }
+  }
+  .header-right { margin-left: auto; display: flex; gap: 20px; align-items: center; }
+  .header-nav { display: flex; gap: 20px; font-size: 15px; }
+  .header-nav a { color: var(--navy-500); font-weight: 600; }
+  .menu-btn { width: 44px; height: 44px; flex: none; border-radius: 999px; border: 2px solid var(--navy-500); background: #fff; color: var(--navy-500); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+  .menu-movil { border-top: 1px solid var(--border-subtle); background: #fff; padding-top: 4px; padding-bottom: 16px; display: flex; flex-direction: column; max-height: calc(100vh - 80px); overflow: auto; }
+  .menu-movil[hidden] { display: none; }
+  .mm-main { display: flex; align-items: center; justify-content: space-between; min-height: 52px; border-bottom: 1px solid var(--border-subtle); color: var(--navy-500); font-weight: 700; font-size: 17px; }
+  .mm-sub { display: flex; align-items: center; gap: 10px; min-height: 48px; border-bottom: 1px solid var(--border-subtle); color: var(--text-body); font-size: 15px; }
+  .mm-last { min-height: 56px; border-bottom: 0; }
+</style>

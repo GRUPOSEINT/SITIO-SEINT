@@ -1,0 +1,14 @@
+---
+interface Props {
+  surface?: 'plain' | 'soft' | 'brand' | 'navy';
+  elevation?: 'sm' | 'md';
+  topRule?: boolean;
+  padding?: string;
+  class?: string;
+  style?: string;
+}
+const { surface = 'plain', elevation = 'sm', topRule = false, padding, class: cls, style = '' } = Astro.props;
+---
+<div class:list={['card', `card--${surface}`, elevation === 'md' && 'card--md', topRule && 'card--rule', cls]} style={(padding ? `padding:${padding};` : '') + style}>
+  <slot />
+</div>

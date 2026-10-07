@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Pagos Bre-B · Grupo Empresarial SEINT" description="Paga desde la app de tu banco con el código QR o la llave Bre-B 0090963153.">
+<main class="px" style="padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(40px,6vw,88px)">
+  <div class="grid-auto" style="--min:280px;max-width:720px;margin:0 auto;gap:clamp(24px,4vw,48px);align-items:center">
+    <div>
+      <a href="/" style="font-size:14px">← Inicio</a>
+      <div class="overline" style="margin-top:20px"><span>Pagos Bre-B</span></div>
+      <h1 class="display" style="font-size:clamp(28px,4vw,42px);line-height:1.1;margin:24px 0 12px;letter-spacing:0">Paga desde la app de tu banco</h1>
+      <p style="margin:0;font-size:17px;line-height:1.6">Escanea el código QR o ingresa la llave en la app de tu banco. El pago llega al instante a Seint Alturas Servicios Especializados.</p>
+      <div style="margin-top:24px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:16px 20px">
+        <div class="label">Llave Bre-B</div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px">
+          <span style="font-family:var(--font-display);font-weight:800;font-size:32px;color:var(--navy-500);letter-spacing:.04em" data-llave>0090963153</span>
+          <button type="button" class="btn btn--ghost btn--sm" data-copiar>Copiar</button>
+        </div>
+      </div>
+    </div>
+    <img src="/assets/qr-breb.png" alt="Código QR de pago Bre-B, llave 0090963153" width="718" height="1280" style="width:100%;height:auto;max-width:340px;justify-self:center;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)" />
+  </div>
+</main>
+</Base>
+<script>
+  const b = document.querySelector<HTMLButtonElement>('[data-copiar]');
+  b?.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('0090963153'); b.textContent = 'Copiada'; setTimeout(() => (b.textContent = 'Copiar'), 2000); } catch { /* el número sigue visible */ }
+  });
+</script>

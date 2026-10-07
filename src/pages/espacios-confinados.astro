@@ -1,0 +1,27 @@
+---
+import PaginaFormacion from '../components/PaginaFormacion.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+import { ROLES_CONFINADOS } from '../data/roles';
+import { cotizarHref } from '../data/sitio';
+---
+<PaginaFormacion
+  seo={{ title: 'Curso de espacios confinados en Bogotá · Res. 0491 de 2020 · SEINT', description: 'Trabajador entrante, vigía, supervisor de entrada, equipo de rescate y reentrenamiento en espacios confinados según la Res. 0491 de 2020. Cotiza en 4 horas.' }}
+  overline="Formación · Res. 0491 de 2020"
+  titulo="Capacitación para trabajo en espacios confinados"
+  intro="Espacios confinados se rige por la Resolución 0491 de 2020, no por la 4272. Los roles, sus horas y sus contenidos son distintos a los de alturas y aquí van separados a propósito."
+  cruce={{ href: '/trabajo-en-alturas', label: 'Ver formación en alturas', boton: true }}
+  rolesTitulo="Roles del sistema de entrada"
+  roles={ROLES_CONFINADOS}
+  cta="Cotizar este rol"
+  tema="Espacios confinados"
+  independiente="Espacios confinados — Trabajador entrante autorizado"
+>
+  <div style="margin-top:20px">
+    <Card surface="soft" padding="24px">
+      <h3 class="h3" style="margin:0 0 8px">Operaciones con alturas y espacios confinados a la vez</h3>
+      <p style="margin:0;font-size:15px">Muchas entradas a tanques y silos combinan los dos marcos normativos. Si es tu caso, cotiza los dos juntos y armamos el cronograma en una sola programación.</p>
+      <div style="margin-top:16px"><Button variant="outline" size="sm" href={cotizarHref('Alturas + espacios confinados (operación combinada)')}>Cotizar los dos</Button></div>
+    </Card>
+  </div>
+</PaginaFormacion>

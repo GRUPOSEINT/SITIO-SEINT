@@ -1,0 +1,16 @@
+---
+import PaginaFormacion from '../components/PaginaFormacion.astro';
+import { ROLES_ALTURAS } from '../data/roles';
+---
+<PaginaFormacion
+  seo={{ title: 'Curso de trabajo en alturas en Bogotá · Res. 4272 de 2021 · SEINT', description: 'Jefe de área, trabajador autorizado, coordinador, reentrenamiento y entrenador en trabajo seguro en alturas. Centro aprobado por el Ministerio del Trabajo. Cotiza en 4 horas.' }}
+  overline="Formación · Res. 4272 de 2021"
+  titulo="Capacitación para trabajo en alturas"
+  intro="Los niveles de formación que exige la Resolución 4272 de 2021 del Ministerio del Trabajo, con su nombre oficial, duración, requisitos de ingreso y contenido temático. Todo se lee aquí: no entregamos los cursos en PDF."
+  cruce={{ href: '/espacios-confinados', label: 'Ver formación en espacios confinados' }}
+  rolesTitulo="Roles y niveles de formación"
+  roles={ROLES_ALTURAS}
+  cta="Cotizar este nivel"
+  tema="Alturas"
+  independiente="Alturas — Trabajador autorizado"
+/>

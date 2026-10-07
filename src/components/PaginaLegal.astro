@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+interface Props { title: string; description: string; html: string }
+const { title, description, html } = Astro.props;
+---
+<Base title={title} description={description}>
+<main class="px" style="padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(40px,6vw,88px)">
+  <div style="max-width:800px;margin:0 auto">
+    <a href="/" style="font-size:14px">← Inicio</a>
+    <Fragment set:html={html} />
+    <div style="margin-top:32px"><a href="/" class="btn btn--outline">Volver al inicio</a></div>
+  </div>
+</main>
+</Base>

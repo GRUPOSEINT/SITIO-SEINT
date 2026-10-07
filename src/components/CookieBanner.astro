@@ -1,0 +1,50 @@
+---
+import Button from './Button.astro';
+// Los identificadores se configuran como variables de entorno en Netlify.
+// Si están vacíos, la herramienta no se carga nunca, aunque haya consentimiento.
+const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
+const pixel = import.meta.env.PUBLIC_META_PIXEL_ID ?? '';
+const cats = [
+  { k: 'an', t: 'Analíticas', d: 'Google Analytics 4' },
+  { k: 'mk', t: 'Marketing', d: 'Píxel de Meta' },
+  { k: 'ct', t: 'Contenido incrustado', d: 'YouTube y Google Maps' },
+];
+---
+<div class="cookie-banner" data-cookie-banner data-ga4={ga4} data-pixel={pixel} role="dialog" aria-label="Preferencias de cookies" hidden>
+  <div class="cb-text">Usamos cookies. Las opcionales solo con tu aceptación. <a href="/politica-de-cookies">Más información</a></div>
+  <div class="cb-actions">
+    <Button variant="outline" size="sm" data-cookies="rechazar">Rechazar</Button>
+    <Button variant="ghost" size="sm" data-cookies="configurar">Configurar</Button>
+    <Button size="sm" data-cookies="aceptar">Aceptar</Button>
+  </div>
+  <div class="cb-panel" data-cookie-panel hidden>
+    <div class="cb-row"><span><strong>Necesarias</strong> · siempre activas</span><span class="cb-muted">Activadas</span></div>
+    {cats.map((c) => (
+      <button type="button" class="cb-toggle" data-cookies-toggle={c.k} aria-pressed="false">
+        <span><strong>{c.t}</strong> · {c.d}</span><span class="cb-state"></span>
+      </button>
+    ))}
+    <div style="display:flex;justify-content:flex-end"><Button size="sm" data-cookies="guardar">Guardar selección</Button></div>
+  </div>
+</div>
+
+<script>
+  import { initCookies } from '../scripts/cookies';
+  initCookies();
+</script>
+
+<style>
+  .cookie-banner { position: fixed; left: 16px; bottom: 16px; z-index: 45; width: min(440px, calc(100vw - 32px)); background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+  .cookie-banner[hidden] { display: none; }
+  .cb-text { font-size: 13px; line-height: 1.45; }
+  .cb-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cb-panel { border-top: 1px solid var(--border-subtle); padding-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .cb-panel[hidden] { display: none; }
+  .cb-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 15px; }
+  .cb-muted { font-size: 13px; color: var(--text-muted); }
+  .cb-toggle { display: flex; justify-content: space-between; gap: 12px; align-items: center; min-height: 44px; padding: 0 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: #fff; font-family: inherit; font-size: 15px; cursor: pointer; color: var(--navy-500); text-align: left; }
+  .cb-state { font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--gray-100); color: var(--gray-600); white-space: nowrap; }
+  .cb-state::after { content: 'Desactivadas'; }
+  .cb-toggle[aria-pressed="true"] .cb-state { background: var(--teal-400); color: var(--navy-500); }
+  .cb-toggle[aria-pressed="true"] .cb-state::after { content: 'Activadas'; }
+</style>

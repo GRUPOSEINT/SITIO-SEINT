@@ -1,0 +1,79 @@
+:root{
+/* --- Brand base (Brand guidelines 2024, p.6) --- */
+--seint-teal:#00C2B6;
+--seint-teal-deep:#00A69C;
+--seint-navy:#0D145C;
+--seint-ink:#010B13;
+
+/* --- Brand ramps (derived from the four base values) --- */
+--teal-50:#E5F8F6;--teal-100:#B8EDE8;--teal-200:#7FE0D8;--teal-300:#33D0C4;
+--teal-400:#00C2B6;--teal-500:#00A69C;--teal-600:#008A82;--teal-700:#046B65;
+--navy-50:#EDEEF5;--navy-100:#CFD2E4;--navy-200:#9AA0C2;--navy-300:#5C659B;
+--navy-400:#28316F;--navy-500:#0D145C;--navy-600:#0A1049;--navy-700:#060A2E;
+
+/* --- Neutrals (letterhead / document grays) --- */
+--white:#FFFFFF;
+--gray-50:#F7F8FA;
+--gray-100:#F1F3F6;
+--gray-200:#E4E7EE;
+--gray-300:#C9CEDA;
+--gray-400:#9AA3B5;
+--gray-500:#6B7488;
+--gray-600:#454C5E;
+--gray-900:#010B13;
+
+/* --- System colors — NOT part of the brand palette ---
+   The 2024 brand book fixes four colors only (teal, teal deep, navy, ink).
+   These exist purely for form states and inline messages. Never use them
+   as brand or layout color. --success is teal-500 so the happy path stays on-brand. */
+--success:#00A69C;
+--warning:#E2A014;
+--danger:#C63A38;
+--info:#28316F;
+
+/* --- Gradient (isotipo / 15 años lockup) --- */
+--gradient-brand:linear-gradient(120deg,#00C2B6 0%,#0D145C 100%); /* @kind color */
+--gradient-brand-soft:linear-gradient(120deg,#E5F8F6 0%,#EDEEF5 100%); /* @kind color */
+
+/* --- Semantic aliases --- */
+--text-strong:var(--navy-500);
+--text-body:var(--gray-600);
+--text-muted:var(--gray-500);
+--text-inverse:var(--white);
+--text-on-teal:var(--navy-500);
+--text-accent:var(--teal-500);
+--text-link:var(--teal-600);
+--text-link-hover:var(--navy-500);
+
+--surface-page:var(--white);
+--surface-subtle:var(--gray-50);
+--surface-card:var(--white);
+--surface-teal:var(--teal-500);
+--surface-teal-soft:var(--teal-50);
+--surface-navy:var(--navy-500);
+--surface-ink:var(--seint-ink);
+
+--border-subtle:var(--gray-200);
+--border-default:var(--gray-300);
+--border-strong:var(--navy-500);
+--border-accent:var(--teal-400);
+
+/* Brand-role aliases. Overridden per business unit in tokens/themes.css:
+   .theme-salud (medicina y salud ocupacional / IPS) = verde
+   .theme-formacion (centro de capacitación y SST)   = azul */
+--accent:var(--teal-400);
+--accent-hover:var(--teal-500);
+--accent-press:var(--teal-600);
+--on-accent:var(--navy-500);
+--brand-primary:var(--teal-500);
+--brand-primary-strong:var(--teal-700);
+--surface-brand:var(--teal-500);
+--surface-brand-strong:var(--teal-700);
+--surface-brand-soft:var(--teal-50);
+--on-brand:var(--white);
+--on-brand-accent:var(--navy-500);
+--on-brand-overline:var(--teal-200);
+--rule-color:var(--teal-500);
+--focus-ring:rgba(0,194,182,.45);
+--overlay-scrim:rgba(1,11,19,.55);
+}

@@ -1,0 +1,97 @@
+# Panel del blog de SEINT (Decap CMS). Se entra por seintsas.com/admin
+# Autenticación: Netlify Identity + Git Gateway (ver docs/como-publicar.md).
+backend:
+  name: git-gateway
+  branch: main
+
+# Flujo editorial: Borrador → En revisión → Listo para publicar.
+publish_mode: editorial_workflow
+locale: es
+
+site_url: https://seintsas.com
+display_url: https://seintsas.com
+logo_url: /assets/logo-grupo-seint-degradado.png
+
+media_folder: public/uploads/blog
+public_folder: /uploads/blog
+
+collections:
+  - name: blog
+    label: Artículos del blog
+    label_singular: Artículo
+    folder: src/content/blog
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: titulo
+    slug: "{{slug}}"
+    summary: "{{titulo}} · {{categoria}} · {{fecha}}"
+    sortable_fields: [fecha, titulo, categoria]
+    view_filters:
+      - { label: Formación, field: categoria, pattern: "Formación" }
+      - { label: Salud ocupacional, field: categoria, pattern: "Salud ocupacional" }
+    preview_path: "blog/{{slug}}"
+    fields:
+      - { label: Título, name: titulo, widget: string }
+      - { label: "Dirección (slug)", name: slug, widget: string, required: false, hint: "Déjalo vacío: se genera a partir del título. Solo minúsculas, números y guiones." , pattern: ["^[a-z0-9-]*$", "Solo minúsculas, números y guiones"] }
+      - { label: Categoría, name: categoria, widget: select, options: ["Formación", "Salud ocupacional"], hint: "Formación se ve en azul; Salud ocupacional en verde." }
+      - { label: Fecha, name: fecha, widget: datetime, time_format: false, date_format: "DD/MM/YYYY", format: "YYYY-MM-DD", picker_utc: true }
+      - { label: "Foto (horizontal 16:9)", name: foto, widget: image, required: false, hint: "Foto fría y clínica: obra, EPP o consultorio. Sin texto encima." }
+      - { label: Resumen, name: resumen, widget: text, hint: "Máximo 160 caracteres. Se usa en la tarjeta del blog y en Google.", pattern: ["^[\\s\\S]{1,160}$", "Máximo 160 caracteres"] }
+      - { label: Texto del artículo, name: body, widget: markdown }
+      - label: Servicio relacionado
+        name: servicio
+        widget: select
+        default: "Consulta general"
+        hint: "El botón Cotiza en 4 h del final del artículo abre el formulario con este servicio."
+        options:
+          - "Consulta general"
+          - "Formación — Rescate vertical"
+          - "Formación — Certificación de punto de anclaje"
+          - "Formación — Riesgo eléctrico"
+          - "Formación — Primeros auxilios"
+          - "Formación — Manejo de montacargas"
+          - "Formación — Andamiaje"
+          - "Formación — Administración del riesgo"
+          - "Formación — Seguridad vial organizacional"
+          - "Formación — Seguridad y Salud en el Trabajo"
+          - "Formación — Trabajo en caliente"
+          - "Formación — Inspección de equipos y EPP"
+          - "Formación — Ergonomía"
+          - "Formación — Autocuidado"
+          - "Formación — IPER"
+          - "Formación — Punto de anclaje"
+          - "Formación — Montacargas"
+          - "Formación — Seguridad vial"
+          - "Formación — SST"
+          - "Alturas — Jefe de área (nivel administrativo)"
+          - "Alturas — Trabajador autorizado"
+          - "Alturas — Coordinador de trabajo seguro en alturas"
+          - "Alturas — Reentrenamiento"
+          - "Alturas — Entrenador en trabajo seguro en alturas"
+          - "Alturas — Consulta de fechas"
+          - "Espacios confinados — Trabajador entrante autorizado"
+          - "Espacios confinados — Vigía"
+          - "Espacios confinados — Consulta de fechas"
+          - "Espacios confinados — Supervisor de entrada"
+          - "Espacios confinados — Equipo de rescate"
+          - "Espacios confinados — Reentrenamiento"
+          - "Alturas + espacios confinados (operación combinada)"
+          - "Medicina ocupacional — Exámenes"
+          - "Revisión de profesiograma por cargo"
+          - "Revisión de matriz por cargo"
+          - "Consultoría SST In-House"
+          - "EPP y dotaciones"
+          - "Otra línea de formación"
+      - { label: "Borrador (no publicar)", name: borrador, widget: boolean, default: false }
+
+  - name: datos
+    label: Datos del sitio
+    files:
+      - name: contadores
+        label: Contadores de la portada
+        file: src/data/contadores.json
+        fields:
+          - { label: Trabajadores certificados, name: trabajadores_certificados, widget: number, value_type: int, min: 0 }
+          - { label: Pacientes atendidos, name: pacientes_atendidos, widget: number, value_type: int, min: 0 }
+          - { label: Fecha de actualización, name: actualizado, widget: datetime, time_format: false, format: "YYYY-MM-DD" }

@@ -1,0 +1,17 @@
+---
+// Contenido incrustado (Google Maps, YouTube) bloqueado hasta que la persona acepte
+// la categoría "contenido incrustado". Uso: <Embed src="https://www.google.com/maps/embed?..." title="Mapa sede Bogotá" />
+interface Props { src: string; title: string; ratio?: string }
+const { src, title, ratio = '16/9' } = Astro.props;
+---
+<div class="embed" data-embed data-embed-src={src} data-embed-title={title} style={`aspect-ratio:${ratio}`}>
+  <div class="embed-empty">
+    <p>Este contenido lo muestra un tercero ({title}) y puede guardar cookies. Se carga solo si lo autorizas.</p>
+    <button type="button" class="btn btn--outline btn--sm" data-embed-accept>Cargar contenido</button>
+  </div>
+</div>
+<style>
+  .embed { position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle); background: var(--surface-subtle); }
+  .embed-empty { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center; text-align: center; padding: 20px; font-size: 14px; }
+  .embed-empty p { margin: 0; max-width: 44ch; }
+</style>

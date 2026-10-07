@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { waHref } from '../../data/sitio';
+---
+<Base title="Tu solicitud llegó · Grupo Empresarial SEINT" description="Recibimos tu solicitud de cotización." noindex>
+<main class="theme-salud px" style="padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(40px,6vw,88px)">
+  <div style="max-width:680px;margin:0 auto;text-align:center">
+    <div style="width:72px;height:72px;border-radius:999px;background:var(--teal-50);display:flex;align-items:center;justify-content:center;margin:0 auto">
+      <Icon name="check" size={34} style="color:var(--teal-700)" />
+    </div>
+    <h1 class="display" style="font-size:clamp(28px,4vw,42px);line-height:1.1;margin:24px 0 12px;letter-spacing:0">Tu solicitud llegó</h1>
+    <p style="margin:0;font-size:18px;line-height:1.6" data-con-radicado hidden>Quedó registrada con el número <strong data-radicado></strong> y la respondemos en menos de 4 horas hábiles.</p>
+    <p style="margin:0;font-size:18px;line-height:1.6" data-sin-radicado>Quedó registrada y la respondemos en menos de 4 horas hábiles.</p>
+    <div class="recibido" data-resumen-box hidden>
+      <div class="label">Lo que recibimos</div>
+      <div style="font-size:16px;margin-top:10px;line-height:1.7" data-resumen></div>
+    </div>
+    <p style="margin:28px 0 0;font-size:16px">¿Es urgente? Sigue por WhatsApp con el servicio ya escrito en el mensaje.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px">
+      <a href={waHref()} target="_blank" rel="noopener" class="wa-go" data-wa-resumen><Icon name="message-circle" size={18} /> Seguir por WhatsApp</a>
+      <a href="/" class="btn btn--outline btn--lg">Volver al inicio</a>
+    </div>
+  </div>
+</main>
+</Base>
+<script>
+  let d: { radicado?: string; resumen?: string; servicio?: string } | null = null;
+  try { d = JSON.parse(sessionStorage.getItem('seint_solicitud') || 'null'); } catch { d = null; }
+  if (d?.radicado) {
+    document.querySelector<HTMLElement>('[data-radicado]')!.textContent = d.radicado;
+    document.querySelector<HTMLElement>('[data-con-radicado]')!.hidden = false;
+    document.querySelector<HTMLElement>('[data-sin-radicado]')!.hidden = true;
+    document.querySelector<HTMLElement>('[data-resumen]')!.textContent = d.resumen || '';
+    document.querySelector<HTMLElement>('[data-resumen-box]')!.hidden = !d.resumen;
+    const msg = `Hola, acabo de enviar la solicitud ${d.radicado} por el sitio. Servicio: ${d.servicio || 'consulta general'}.`;
+    const wa = 'https://wa.me/573163352739?text=' + encodeURIComponent(msg);
+    document.querySelectorAll<HTMLAnchorElement>('[data-wa-resumen],[data-wa]').forEach((a) => (a.href = wa));
+  }
+</script>
+<style>
+  .recibido { margin-top: 24px; text-align: left; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; }
+  .recibido[hidden] { display: none; }
+  .wa-go { display: inline-flex; align-items: center; gap: 8px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--teal-400); color: var(--navy-500); font-weight: 700; }
+  .wa-go:hover { background: var(--teal-300); color: var(--navy-500); text-decoration: none; }
+</style>

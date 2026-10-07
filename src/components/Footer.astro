@@ -1,0 +1,77 @@
+---
+import { SITIO, LINKS, cotizarHref } from '../data/sitio';
+const anio = new Date().getFullYear();
+---
+<footer class="site-footer px">
+  <div class="container grid-auto footer-grid" style="--min:240px">
+    <div>
+      <img src="/assets/logo-grupo-seint-white.png" alt="SEINT — Su bienestar, Nuestro compromiso" height="54" style="height:54px;width:auto;display:block" />
+      <p class="footer-about">Centro de formación e IPS. Servicios y soluciones corporativas para el cumplimiento de la normatividad en Seguridad y Salud en el Trabajo.</p>
+      <div class="footer-cred">
+        Ministerio del Trabajo · <a href={LINKS.mintrabajo} target="_blank" rel="noopener" class="u">Aprobación Ministerio</a> (búscanos como SEINT)<br />
+        ICONTEC NTC 6072<br />
+        Licencia SSO No. 10728
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Servicios</div>
+      <div class="footer-list">
+        <a href="/trabajo-en-alturas">Trabajo en alturas</a>
+        <a href="/espacios-confinados">Espacios confinados</a>
+        <a href="/medicina-ocupacional">Medicina ocupacional</a>
+        <a href={cotizarHref('Consultoría SST In-House')}>Consultoría SST</a>
+        <a href={cotizarHref('EPP y dotaciones')}>EPP y dotaciones</a>
+        <a href="/blog">Blog</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Contacto</div>
+      <div class="footer-contact">
+        <span>Comercial: <a href={`tel:${SITIO.telComercialE164}`}>{SITIO.telComercial}</a></span>
+        <span>Fijo: <a href={`tel:${SITIO.telFijoE164}`}>{SITIO.telFijo}</a></span>
+        <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>
+        <span>{SITIO.direccion}</span>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Trámites y redes</div>
+      <div class="footer-list">
+        <a href={LINKS.certificado} target="_blank" rel="noopener">Consulte su certificado TSA/EC</a>
+        <a href={LINKS.empresasTsa} target="_blank" rel="noopener">Ingreso empresas TSA/EC</a>
+        <a href={LINKS.empresasIps} target="_blank" rel="noopener">Ingreso empresas IPS</a>
+        <a href="/pagos"><span class="breb">Pagos Bre-B - Llave</span></a>
+        <a href={LINKS.instagram} target="_blank" rel="noopener">Instagram @gruposeint.co</a>
+        <a href={LINKS.tiktok} target="_blank" rel="noopener">TikTok @gruposeint.co</a>
+        <a href={LINKS.youtube} target="_blank" rel="noopener">YouTube @gruposeint</a>
+        <a href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn Grupo Empresarial SEINT</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {anio} Grupo Empresarial SEINT SAS · Su bienestar, Nuestro compromiso</span>
+    <span class="footer-legal">
+      <a href="/politica-de-datos">Política de tratamiento de datos</a>
+      <a href="/politica-de-cookies">Política de cookies</a>
+      <button type="button" data-cookies-abrir>Configuración de cookies</button>
+    </span>
+  </div>
+</footer>
+<style>
+  .site-footer { margin-top: auto; background: var(--surface-navy); color: #fff; padding-top: clamp(40px,5vw,64px); padding-bottom: 96px; }
+  .footer-grid { gap: clamp(24px,3vw,48px); }
+  .site-footer a { color: #fff; }
+  .site-footer a:hover { color: #fff; }
+  .u { text-decoration: underline; text-underline-offset: 3px; }
+  .footer-about { margin-top: 20px; margin-bottom: 0; font-size: 15px; line-height: 1.6; max-width: 38ch; color: #fff; }
+  .footer-cred { margin-top: 20px; font-size: 14px; line-height: 1.8; color: #fff; }
+  .footer-h { color: var(--teal-200); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; margin-bottom: 16px; }
+  .footer-list { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+  .footer-list a { display: block; padding: 6px 0; }
+  .footer-contact { display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: #fff; }
+  .breb { color: var(--teal-300); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .footer-bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.16); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 13px; color: #fff; }
+  .footer-legal { display: flex; gap: 16px; flex-wrap: wrap; }
+  .footer-legal a, .footer-legal button { color: #fff; display: block; padding: 6px 0; }
+  .footer-legal button { background: none; border: 0; font: inherit; cursor: pointer; }
+  .footer-legal button:hover { text-decoration: underline; text-underline-offset: 3px; }
+</style>

@@ -1,0 +1,12 @@
+# Redirecciones 301 del sitio anterior (Netlify). Formato: /ruta-vieja  /ruta-nueva  301
+# PENDIENTE: levantar el inventario de URLs del sitio actual mientras siga en línea
+# (páginas, PDF de cursos y enlaces de pago) y completar esta lista. Ver docs/pendientes.md.
+#
+# Ejemplos de formato (reemplazar por las URLs reales):
+# /cursos/trabajo-en-alturas.pdf      /trabajo-en-alturas                     301
+# /index.php/medicina-ocupacional      /medicina-ocupacional                   301
+
+/formacion/trabajo-en-alturas        /trabajo-en-alturas        301
+/formacion/espacios-confinados       /espacios-confinados       301
+/ips                                 /medicina-ocupacional      301
+/politica-de-privacidad              /politica-de-datos         301
