@@ -1,13 +1,34 @@
 ---
-// Espacio para foto real. Mientras SEINT no entregue la foto (`src` vacío) se muestra
-// un recuadro con la descripción de la foto que va ahí. Fotos frías y clínicas; el texto nunca va sobre la foto.
-interface Props { src?: string; alt?: string; placeholder: string; class?: string; style?: string }
-const { src, alt = '', placeholder, class: cls, style } = Astro.props;
+// Foto del sitio. `foto` es el nombre base en public/fotos/ (existen -800 y -1600 en .webp y .jpg).
+// Mientras SEINT no entregue una foto se muestra un recuadro con la descripción de la que va ahí.
+// `src` admite una ruta directa (fotos del blog subidas desde /admin).
+// Fotos frías y clínicas; el texto nunca va sobre la foto.
+interface Props {
+  foto?: string;
+  src?: string;
+  alt?: string;
+  placeholder: string;
+  position?: string;
+  eager?: boolean;
+  sizes?: string;
+  class?: string;
+  style?: string;
+}
+const { foto, src, alt = '', placeholder, position = 'center', eager = false, sizes = '(min-width: 760px) 50vw, 100vw', class: cls, style } = Astro.props;
+const base = foto ? `/fotos/${foto}` : null;
+const loading = eager ? 'eager' : 'lazy';
 ---
 <div class:list={['photo', cls]} style={style}>
-  {src
-    ? <img src={src} alt={alt} loading="lazy" decoding="async" />
-    : <div class="photo-empty" role="img" aria-label={placeholder}><span>{placeholder}</span></div>}
+  {base ? (
+    <picture>
+      <source type="image/webp" srcset={`${base}-800.webp 800w, ${base}-1600.webp 1600w`} sizes={sizes} />
+      <img src={`${base}-1600.jpg`} srcset={`${base}-800.jpg 800w, ${base}-1600.jpg 1600w`} sizes={sizes} alt={alt} width="1600" height="1068" loading={loading} decoding="async" fetchpriority={eager ? 'high' : undefined} style={`object-position:${position}`} />
+    </picture>
+  ) : src ? (
+    <img src={src} alt={alt} loading={loading} decoding="async" style={`object-position:${position}`} />
+  ) : (
+    <div class="photo-empty" role="img" aria-label={placeholder}><span>{placeholder}</span></div>
+  )}
 </div>
 <style>
   .photo { position: relative; overflow: hidden; border-radius: var(--radius-lg); }

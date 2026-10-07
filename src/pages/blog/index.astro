@@ -18,7 +18,7 @@ const cats = ['Todos', 'Formación', 'Salud ocupacional'];
     <div class="posts">
       {posts.map((p) => (
         <a href={`/blog/${slugDe(p)}`} class:list={['post', temaDe(p)]} data-post-cat={p.data.categoria}>
-          <Photo src={p.data.foto || undefined} alt="" placeholder="Foto del artículo" class="post-foto" style="border-radius:0" />
+          <Photo src={p.data.foto || undefined} alt="" sizes="(min-width: 760px) 33vw, 100vw" placeholder="Foto del artículo" class="post-foto" style="border-radius:0" />
           <div class="post-body">
             <div class="label">{p.data.categoria} · {fechaCorta(p.data.fecha)}{p.data.borrador && ' · Borrador'}</div>
             <h2 class="post-h">{p.data.titulo}</h2>

@@ -6,7 +6,7 @@ Estado al terminar la implementación. Nada de esto se puede resolver desde el c
 - [ ] **Abogado:** política de datos (datos de salud, Res. 2346/2007 y 1995/1999), cookies y SARLAFT.
 - [ ] **Área médica:** contenido de Espacios confinados y condiciones de laboratorio (lista de exámenes de 3 horas).
 - [x] **Correo único:** info@seintsas.com en todo el sitio, incluidas las políticas (confirmado por SEINT).
-- [ ] **Fotos reales:** portada (`src/pages/index.astro`), laboratorio (`src/pages/medicina-ocupacional.astro`) y blog. Mientras falten se ve un recuadro con la descripción de la foto.
+- [x] **Fotos reales de portada y laboratorio:** cargadas en `public/fotos/`. Falta confirmar que SEINT tiene la autorización escrita de las personas que aparecen (uso de imagen, Ley 1581 de 2012).
 - [ ] **Listado de cursos:** el spec pide cerrarlo con SEINT antes de publicar la portada.
 - [ ] **LinkedIn:** confirmar que `linkedin.com/company/grupo-empresarial-seint` es el usuario oficial.
 
