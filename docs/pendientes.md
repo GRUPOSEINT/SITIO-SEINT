@@ -12,7 +12,7 @@ Estado al terminar la implementación. Nada de esto se puede resolver desde el c
 
 ## Integraciones
 - [ ] **Biofile:** confirmar código vigente del plugin, usuarios activos y si el portal solo acepta el dominio seintsas.com (`LINKS.biofile` en `src/data/sitio.ts`).
-- [ ] **Redirecciones 301:** las 11 páginas del sitemap viejo ya están en `public/_redirects`. Faltan los PDF de cursos (no están en el sitemap) y confirmar los destinos de `cursos.html` y `programas-de-capacitacion.html`.
+- [ ] **Redirecciones 301:** cargadas en `public/_redirects` (11 páginas del sitemap y 3 PDF de cursos, más una regla general para otros PDF de `/assets/`). Al publicar, probar cada dirección vieja y confirmar los destinos de `cursos.html` y `programas-de-capacitacion.html`.
 - [ ] **Google Business Profile:** URL del perfil y horario de atención. Agregarlos al bloque de datos estructurados en `src/layouts/Base.astro` (`sameAs` y `openingHours`). Nombre, dirección y teléfono deben coincidir letra por letra.
 - [ ] **GA4 y Meta Pixel:** cargar `PUBLIC_GA4_ID` y `PUBLIC_META_PIXEL_ID` como variables de entorno en Netlify. Sin ellas no se carga ninguna herramienta.
 - [ ] **Netlify Forms:** activar notificaciones por correo al buzón comercial (Forms → Form notifications). Las solicitudes quedan guardadas en Netlify aunque el correo falle.

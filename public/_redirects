@@ -15,5 +15,13 @@
 /preguntas-frecuentes.html        /                        301
 /contactanos.html                 /cotizar                 301
 
-# PENDIENTE: PDF de cursos e imágenes enlazadas desde correos o Google.
-# El sitemap no los lista. Agregarlos cuando se conozca su ruta.
+# PDF de cursos del sitio anterior (cada uno abre su rol ya desplegado).
+# "Avanzado" era el nivel de la Res. 1409/2012 que hoy equivale a trabajador autorizado (Res. 4272/2021).
+# "Básico operativo" no tiene equivalente directo en la 4272: va a la página general de alturas.
+/assets/basico-operativo.pdf      /trabajo-en-alturas                              301
+/assets/curso-avanzado.pdf        /trabajo-en-alturas#rol-trabajador-autorizado    301
+/assets/coordinador.pdf           /trabajo-en-alturas#rol-coordinador              301
+
+# Cualquier otro PDF viejo de /assets/ que no esté en la lista.
+# Solo aplica si el archivo no existe en el sitio nuevo: los logos de /assets/ se siguen sirviendo normal.
+/assets/*                         /trabajo-en-alturas                              301
