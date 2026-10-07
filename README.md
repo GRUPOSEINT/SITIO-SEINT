@@ -1,6 +1,6 @@
 # Sitio web Grupo Empresarial SEINT (seintsas.com)
 
-Implementación del diseño de `diseno-referencia/` (paquete de Claude Design, solo como referencia: no se publica).
+Implementación del diseño hecho en Claude Design.
 Astro 5, sitio estático. Netlify para hosting, formularios y autenticación del panel. Decap CMS para el blog.
 
 ## Comandos
@@ -45,4 +45,4 @@ npm run preview
 4. Variables de entorno opcionales: `PUBLIC_GA4_ID`, `PUBLIC_META_PIXEL_ID`.
 5. Conectar el dominio seintsas.com y forzar HTTPS.
 
-Guía para SEINT: `docs/como-publicar.md`. Lo que falta antes de publicar: `docs/pendientes.md`.
+Guía para SEINT: `docs/como-publicar.md`.

@@ -1,5 +1,5 @@
 // Datos fijos del sitio. Nombre, dirección y teléfono deben coincidir letra por letra
-// con el perfil de Google Business (ver docs/pendientes.md).
+// con el perfil de Google Business.
 export const SITIO = {
   nombre: 'Grupo Empresarial SEINT',
   razonSocial: 'Servicios Especializados Integrales SAS (SEINT SAS)',
