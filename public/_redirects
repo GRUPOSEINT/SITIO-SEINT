@@ -1,12 +1,19 @@
-# Redirecciones 301 del sitio anterior (Netlify). Formato: /ruta-vieja  /ruta-nueva  301
-# PENDIENTE: levantar el inventario de URLs del sitio actual mientras siga en línea
-# (páginas, PDF de cursos y enlaces de pago) y completar esta lista. Ver docs/pendientes.md.
+# Redirecciones 301 del sitio anterior de seintsas.com (Netlify).
+# Fuente: sitemap.xml del sitio anterior (11 páginas, última actualización 2021).
+# Formato: /ruta-vieja   /ruta-nueva   301
 #
-# Ejemplos de formato (reemplazar por las URLs reales):
-# /cursos/trabajo-en-alturas.pdf      /trabajo-en-alturas                     301
-# /index.php/medicina-ocupacional      /medicina-ocupacional                   301
+# /index.html no se redirige: el sitio nuevo ya sirve la portada en esa ruta.
 
-/formacion/trabajo-en-alturas        /trabajo-en-alturas        301
-/formacion/espacios-confinados       /espacios-confinados       301
-/ips                                 /medicina-ocupacional      301
-/politica-de-privacidad              /politica-de-datos         301
+/cursos.html                      /trabajo-en-alturas      301
+/programas-de-capacitacion.html   /trabajo-en-alturas      301
+/ips.html                         /medicina-ocupacional    301
+/medico-ocupacional.html          /medicina-ocupacional    301
+/paraclinicos.html                /medicina-ocupacional    301
+/examenes-tsa.html                /medicina-ocupacional    301
+/otros-servicios.html             /                        301
+/nosotros.html                    /                        301
+/preguntas-frecuentes.html        /                        301
+/contactanos.html                 /cotizar                 301
+
+# PENDIENTE: PDF de cursos e imágenes enlazadas desde correos o Google.
+# El sitemap no los lista. Agregarlos cuando se conozca su ruta.
