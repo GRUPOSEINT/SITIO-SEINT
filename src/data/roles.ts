@@ -33,7 +33,7 @@ export const ROLES_ALTURAS: Rol[] = [
   },
   {
     id: 'rol-reentrenamiento', nombre: 'Reentrenamiento', meta: '20 horas · Presencial',
-    requisitos: ['Certificado previo de trabajador autorizado.', 'Certificado médico de aptitud vigente.', 'Afiliación vigente a ARL.'],
+    requisitos: ['Certificado de trabajo en alturas.', 'Certificado médico de aptitud vigente.', 'Afiliación vigente a ARL.'],
     temario: ['Actualización de la normatividad vigente.', 'Cambios en equipos y sistemas de protección.', 'Lecciones aprendidas de accidentalidad del sector.', 'Reentrenamiento práctico y evaluación.'],
     paraQuien: 'Obligatorio cada 18 meses para mantener vigente la certificación del trabajador.',
     servicio: 'Alturas — Reentrenamiento',
@@ -44,7 +44,7 @@ export const ROLES_ALTURAS: Rol[] = [
 export const ROLES_CONFINADOS: Rol[] = [
   {
     id: 'rol-ec-entrante', nombre: 'Trabajador entrante', meta: '20 horas · Presencial',
-    requisitos: ['Examen médico ocupacional vigente con énfasis en alturas y espacios confinados.', 'Copia del certificado de trabajo en alturas vigente.'],
+    requisitos: ['Examen médico ocupacional vigente con énfasis en alturas y espacios confinados.', 'Copia del certificado de trabajo en alturas vigente.', 'Afiliación vigente a ARL.'],
     temario: ['Clasificación de espacios confinados y peligros asociados.', 'Atmósferas peligrosas: deficiencia de oxígeno, inflamabilidad, toxicidad.', 'Medición y monitoreo de gases.', 'Equipos de protección respiratoria y de acceso.', 'Permiso de entrada y comunicación con el vigía.', 'Práctica de entrada y salida.'],
     paraQuien: 'Para quien ingresa al espacio confinado a ejecutar la tarea.',
     servicio: 'Espacios confinados — Trabajador entrante',
