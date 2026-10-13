@@ -4,7 +4,7 @@ categoria: "Formación"
 fecha: 2026-09-01
 foto: ""
 resumen: "Supervisor, vigía y entrante tienen funciones distintas. Así se reparte la responsabilidad en una entrada."
-servicio: "Espacios confinados — Trabajador entrante autorizado"
+servicio: "Espacios confinados — Trabajador entrante"
 borrador: true
 ---
 

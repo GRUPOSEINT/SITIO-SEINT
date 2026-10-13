@@ -14,20 +14,22 @@ const condiciones = [
 const momentos = [
   ['01', 'Examen de ingreso', 'Antes de empezar. Define si la persona es apta para el cargo según su profesiograma.'],
   ['02', 'Examen periódico', 'Durante el vínculo, con la frecuencia que exige el profesiograma del cargo.'],
-  ['03', 'Examen de egreso', 'Al terminar. Deja registro del estado de salud a la salida.'],
+  ['03', 'Examen post incapacidad', 'Al regresar de una incapacidad de 30 días o más, o antes si la condición de salud lo justifica. Define si la persona puede retomar su cargo y con qué recomendaciones.'],
+  ['04', 'Examen de seguimiento', 'Para vigilar la evolución de una condición de salud o el cumplimiento de restricciones y recomendaciones médicas.'],
+  ['05', 'Examen de egreso', 'Al terminar. Deja registro del estado de salud a la salida.'],
 ];
 ---
 <Base
   title="Exámenes médicos ocupacionales en Bogotá · Laboratorio propio, resultados en 3 horas · SEINT"
-  description="Exámenes de ingreso, periódicos y de egreso con el profesiograma de cada cargo. Laboratorio clínico propio: resultados en 3 horas, lunes a sábado, muestras de 6:00 a 10:00 a.m."
+  description="Exámenes de ingreso, periódicos, post incapacidad, de seguimiento y de egreso con el profesiograma de cada cargo. Laboratorio clínico propio: resultados en 3 horas, lunes a sábado, muestras de 6:00 a 10:00 a.m."
 >
 <main class="theme-salud">
   <section class="ihero px">
     <div class="container">
       <a href="/" style="color:#fff;font-size:14px">← Inicio</a>
-      <div class="overline" style="color:var(--teal-100,#D9FBF8);margin-top:20px"><span>IPS · Res. 2346 de 2007</span></div>
+      <div class="overline" style="color:var(--teal-100,#D9FBF8);margin-top:20px"><span>IPS · Res. 1843 de 2025</span></div>
       <h1 class="display ihero-h1">Medicina ocupacional con laboratorio clínico propio</h1>
-      <p class="ihero-p">Exámenes médicos ocupacionales de ingreso, periódicos y de egreso, con el profesiograma definido por el cargo y su riesgo. El laboratorio está en nuestra sede: la muestra no sale a un tercero.</p>
+      <p class="ihero-p">Exámenes médicos ocupacionales de ingreso, periódicos, post incapacidad, de seguimiento y de egreso, con el profesiograma definido por el cargo y su riesgo. El laboratorio está en nuestra sede: la muestra no sale a un tercero.</p>
       <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px">
         <Button variant="inverse" size="lg" href={cotizarHref('Medicina ocupacional — Exámenes')}>Cotizar exámenes</Button>
       </div>
@@ -57,10 +59,10 @@ const momentos = [
 
   <section class="px" style="background:var(--surface-subtle);padding-top:clamp(32px,4vw,64px);padding-bottom:clamp(32px,4vw,64px)">
     <div class="container">
-      <div class="overline"><span>Res. 2346 de 2007</span></div>
-      <h2 class="display" style="font-size:clamp(24px,3vw,34px);margin:24px 0 8px;letter-spacing:0;line-height:1.2">Los 3 momentos del examen</h2>
+      <div class="overline"><span>Res. 1843 de 2025</span></div>
+      <h2 class="display" style="font-size:clamp(24px,3vw,34px);margin:24px 0 8px;letter-spacing:0;line-height:1.2">Los 5 momentos del examen</h2>
       <p style="margin:0 0 32px;font-size:17px;max-width:60ch">No todos los exámenes ocupacionales son iguales. Cuál pedir y con qué pruebas lo define el cargo y su profesiograma, no el precio.</p>
-      <div class="grid-auto" style="--min:260px;gap:20px">
+      <div class="grid-auto" style="--min:200px;gap:20px">
         {momentos.map(([n, t, d]) => (
           <Card padding="24px" topRule>
             <div style="font-family:var(--font-display);font-weight:800;font-size:36px;color:var(--brand-primary);line-height:1">{n}</div>

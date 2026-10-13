@@ -8,6 +8,6 @@ servicio: "Medicina ocupacional — Exámenes"
 borrador: true
 ---
 
-Texto de ejemplo. Aquí va el desarrollo del artículo sobre profesiograma y Res. 2346 de 2007.
+Texto de ejemplo. Aquí va el desarrollo del artículo sobre profesiograma y Res. 1843 de 2025.
 
 Cada párrafo se escribe en el gestor del blog; el diseño se aplica solo.

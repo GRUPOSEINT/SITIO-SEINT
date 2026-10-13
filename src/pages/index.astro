@@ -11,8 +11,8 @@ import contadores from '../data/contadores.json';
 const cifra = (n: number) => n.toLocaleString('es-CO') + '+';
 const cursos = [
   'Rescate vertical', 'Certificación de punto de anclaje', 'Riesgo eléctrico', 'Primeros auxilios',
-  'Manejo de montacargas', 'Andamiaje', 'Administración del riesgo', 'Seguridad vial organizacional',
-  'Seguridad y Salud en el Trabajo', 'Trabajo en caliente', 'Inspección de equipos y EPP', 'Ergonomía', 'Autocuidado', 'IPER',
+  'Manejo de montacargas', 'Andamiaje', 'Seguridad vial organizacional',
+  'Seguridad y Salud en el Trabajo', 'Trabajo en caliente', 'Inspección de equipos y EPP', 'Ergonomía',
 ];
 ---
 <Base
@@ -55,7 +55,7 @@ const cursos = [
         <Icon name="hard-hat" size={32} style="color:var(--brand-primary)" />
         <div class="overline" style="margin-top:12px"><span>Centro de capacitación</span></div>
         <h2 class="display unit-h2">Formación y Certificación</h2>
-        <p style="margin:0;font-size:17px;line-height:1.6">No dictamos un curso: somos el centro de capacitación completo, aprobado por el Ministerio del Trabajo.</p>
+        <p style="margin:0;font-size:17px;line-height:1.6">No dictamos un curso: formamos y capacitamos a tu personal de forma integral, con aprobación del Ministerio del Trabajo.</p>
         <div class="grid-auto" style="--min:200px;gap:8px 20px;margin:24px 0 0">
           <a href="/trabajo-en-alturas" class="pill-link" style="justify-self:start">Trabajo en alturas <Icon name="arrow-right" size={14} /></a>
           <a href="/espacios-confinados" class="pill-link" style="justify-self:start">Espacios confinados <Icon name="arrow-right" size={14} /></a>
