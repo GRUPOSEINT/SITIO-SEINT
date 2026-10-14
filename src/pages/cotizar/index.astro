@@ -20,10 +20,6 @@ const AUTORIZACION = `Autorizo a SEINT SAS el tratamiento de mis datos personale
 
     <form name="cotizacion" method="POST" action="/cotizar/gracias" data-netlify="true" netlify-honeypot="empresa_web" novalidate class="grid-auto form" style="--min:240px" data-form>
       <input type="hidden" name="form-name" value="cotizacion" />
-      <input type="hidden" name="tipo" value="empresa" />
-      <input type="hidden" name="radicado" value="" />
-      <input type="hidden" name="autorizacion_fecha" value="" />
-      <input type="hidden" name="autorizacion_texto" value={AUTORIZACION} />
       <p class="hp" aria-hidden="true"><label>No llenar este campo <input name="empresa_web" tabindex="-1" autocomplete="off" /></label></p>
 
       <div class="field" data-field="nombre">
@@ -82,6 +78,10 @@ const AUTORIZACION = `Autorizo a SEINT SAS el tratamiento de mis datos personale
         <button type="submit" class="btn btn--secondary btn--lg" data-submit>Enviar solicitud</button>
         <a href={waHref()} target="_blank" rel="noopener" class="wa-out" data-wa><Icon name="message-circle" size={18} /> Prefiero WhatsApp</a>
       </div>
+      <input type="hidden" name="tipo" value="empresa" />
+      <input type="hidden" name="radicado" value="" />
+      <input type="hidden" name="autorizacion_fecha" value="" />
+      <input type="hidden" name="autorizacion_texto" value={AUTORIZACION} />
     </form>
   </div>
 </main>
