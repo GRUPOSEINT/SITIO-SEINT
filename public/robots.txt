@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cotizar/gracias
+
+Sitemap: https://seintsas.com/sitemap-index.xml
