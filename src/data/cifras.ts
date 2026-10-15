@@ -1,7 +1,7 @@
 // Cifras de la portada con crecimiento estimado (decisión de gerencia, octubre 2026).
 // Parten de la cifra real a la fecha `actualizado` de contadores.json y suman `por_dia_habil`
-// por cada día de lunes a sábado transcurrido desde entonces. Se usa el piso del promedio que
-// reporta SEINT (25 diarios) para no inflar la cifra. Cuando haya un dato real nuevo, se cambian
+// por cada día de lunes a sábado transcurrido desde entonces (cifras y ritmo definidos por SEINT;
+// 15-10-2026: 45.000 trabajadores +6/día y 63.200 pacientes +22/día). Cuando haya un dato real nuevo, se cambian
 // la cifra y la fecha en contadores.json y el cálculo arranca de ahí.
 // La misma cuenta se repite en el navegador (index.astro) para que la cifra avance sin publicar.
 
