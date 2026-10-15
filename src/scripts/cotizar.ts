@@ -1,5 +1,5 @@
 // Formulario de cotización: empresa / persona, servicio precargado desde ?servicio=,
-// validación en línea, envío a Netlify Forms y paso a /cotizar/gracias.
+// validación en línea, envío a /cotizar/enviar.php (correo a SEINT) y paso a /cotizar/gracias.
 const WA = 'https://wa.me/573163352739?text=';
 type Tipo = 'empresa' | 'persona';
 
@@ -109,8 +109,9 @@ export function initCotizar() {
     boton.textContent = 'Enviando…';
     try {
       const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString();
-      const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const r = await fetch('/cotizar/enviar.php', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json' }, body });
+      const res = await r.json().catch(() => null);
+      if (!r.ok || !res?.ok) throw new Error('HTTP ' + r.status);
       const v = (n: string) => (el(n)?.value || '').trim();
       const resumen = [v('servicio') || 'Consulta general', tipo === 'empresa' ? v('empresa') : 'Persona independiente', v('nombre'), v('correo'), v('telefono'), tipo === 'empresa' ? v('personas') + ' personas' : v('ciudad')].filter(Boolean).join(' · ');
       try { sessionStorage.setItem('seint_solicitud', JSON.stringify({ radicado, resumen, servicio: v('servicio') })); } catch { /* sin almacenamiento */ }

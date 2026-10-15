@@ -18,8 +18,7 @@ const AUTORIZACION = `Autorizo a SEINT SAS el tratamiento de mis datos personale
     <p class="tipo-nota" data-nota="empresa">Formulario de empresa: pedimos razón social y número de personas para cotizar el grupo.</p>
     <p class="tipo-nota" data-nota="persona" hidden>Formulario de persona independiente: no te pedimos empresa ni número de trabajadores. Certificamos a personas por su cuenta.</p>
 
-    <form name="cotizacion" method="POST" action="/cotizar/gracias" data-netlify="true" netlify-honeypot="empresa_web" novalidate class="grid-auto form" style="--min:240px" data-form>
-      <input type="hidden" name="form-name" value="cotizacion" />
+    <form name="cotizacion" method="POST" action="/cotizar/enviar.php" novalidate class="grid-auto form" style="--min:240px" data-form>
       <p class="hp" aria-hidden="true"><label>No llenar este campo <input name="empresa_web" tabindex="-1" autocomplete="off" /></label></p>
 
       <div class="field" data-field="nombre">

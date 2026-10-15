@@ -26,8 +26,7 @@ export const LINKS = {
   linkedin: 'https://www.linkedin.com/company/grupo-empresarial-seint',
 };
 
-// Opciones del campo "Servicio de interés". Si cambias esta lista, cambia también
-// las opciones del campo `servicio` en public/admin/config.yml.
+// Opciones del campo "Servicio de interés" del formulario de cotización.
 export const SERVICIOS = [
   'Consulta general',
   'Formación — Rescate vertical',

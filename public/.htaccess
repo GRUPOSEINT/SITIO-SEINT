@@ -1,0 +1,66 @@
+# Sitio Grupo Empresarial SEINT — configuración del servidor (Apache, hosting Ferozo).
+# Reemplaza lo que hacían _redirects y netlify.toml en Netlify.
+
+Options -Indexes
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+
+# Las páginas viven en carpetas (/trabajo-en-alturas/index.html). Se sirven con y sin
+# barra final, sin redirección extra (ver la regla al final del bloque de rewrite).
+DirectorySlash Off
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# --- https y dominio sin www -------------------------------------------------------
+# Activar SOLO después de comprobar que https://seintsas.com abre con candado.
+# Si se activan sin certificado, el sitio entra en un ciclo de redirecciones.
+# Para activarlas, quitar el # del inicio de las 5 líneas.
+#RewriteCond %{HTTPS} !=on
+#RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE]
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+
+# --- Redirecciones 301 del sitio anterior ------------------------------------------
+# Fuente: sitemap.xml del sitio anterior (11 páginas, última actualización 2021).
+RewriteRule ^(cursos|programas-de-capacitacion)\.html$ /trabajo-en-alturas [R=301,L]
+RewriteRule ^(ips|medico-ocupacional|paraclinicos|examenes-tsa)\.html$ /medicina-ocupacional [R=301,L]
+RewriteRule ^(otros-servicios|nosotros|preguntas-frecuentes)\.html$ / [R=301,L]
+RewriteRule ^contactanos\.html$ /cotizar [R=301,L]
+
+# PDF de cursos del sitio anterior (cada uno abre su rol ya desplegado).
+# "Avanzado" era el nivel de la Res. 1409/2012 que hoy equivale a trabajador autorizado (Res. 4272/2021).
+RewriteRule ^assets/basico-operativo\.pdf$ /trabajo-en-alturas [R=301,L]
+RewriteRule ^assets/curso-avanzado\.pdf$ /trabajo-en-alturas#rol-trabajador-autorizado [R=301,L,NE]
+RewriteRule ^assets/coordinador\.pdf$ /trabajo-en-alturas#rol-coordinador [R=301,L,NE]
+
+# Cualquier otro archivo viejo de /assets/ que ya no exista. Los logos actuales se sirven normal.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^assets/ /trabajo-en-alturas [R=301,L]
+
+# --- Páginas en carpetas -----------------------------------------------------------
+# /trabajo-en-alturas y /trabajo-en-alturas/ sirven /trabajo-en-alturas/index.html.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+?)/?$ $1/index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+# Archivos con huella en el nombre (_astro): nunca cambian, se guardan un año.
+<If "%{REQUEST_URI} =~ m#^/_astro/#">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</If>
+<FilesMatch "\.(webp|jpe?g|png|svg|ico|woff2?)$">
+  Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+<FilesMatch "\.html$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml
+</IfModule>

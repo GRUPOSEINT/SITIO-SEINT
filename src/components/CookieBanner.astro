@@ -1,6 +1,6 @@
 ---
 import Button from './Button.astro';
-// Los identificadores se configuran como variables de entorno en Netlify.
+// Los identificadores van en el archivo .env (PUBLIC_GA4_ID, PUBLIC_META_PIXEL_ID) antes de armar el paquete.
 // Si están vacíos, la herramienta no se carga nunca, aunque haya consentimiento.
 const ga4 = import.meta.env.PUBLIC_GA4_ID ?? '';
 const pixel = import.meta.env.PUBLIC_META_PIXEL_ID ?? '';
