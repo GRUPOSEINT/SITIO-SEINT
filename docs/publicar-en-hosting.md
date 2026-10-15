@@ -40,12 +40,18 @@ Cada versión del sitio es un archivo **.zip**. Publicar es subir ese .zip y des
   que cada persona autorizó el tratamiento de sus datos. **No la borres ni la compartas.**
 - Si un correo no llegó, la columna `correo_enviado` del CSV dice `no`.
 
-## Activar https y quitar el www (una vez, cuando el candado funcione)
+## Activar https (una vez, después del lanzamiento)
 
-Cuando `https://seintsas.com` abra con candado, en el archivo `.htaccess` quita el `#` del
-inicio de las 5 líneas del bloque "https y dominio sin www". Desde ese momento todo el tráfico
-va a `https://seintsas.com`. Si después de activarlas el sitio no abre ("demasiadas
-redirecciones"), vuelve a poner los `#`.
+seintsas.com ya tiene certificado (Sectigo, vence el 25 de marzo de 2027). Para que todo el tráfico
+vaya por https: en el panel, **Dominios → Dominios**, enciende el interruptor **"Redirección https"**
+de la fila seintsas.com. Comprueba que la página abre con candado.
+
+Si además se quiere enviar `www.seintsas.com` a `seintsas.com`, en el `.htaccess` están las reglas
+listas (bloque "https y dominio sin www"): no las actives si usaste el interruptor del panel sin
+consultarlo antes, para no duplicar redirecciones.
+
+**Importante:** el certificado vence el 25 de marzo de 2027. Hay que renovarlo antes en DonWeb
+(Certificados SSL); si vence, los navegadores mostrarán el sitio como inseguro.
 
 ## Si algo sale mal
 
