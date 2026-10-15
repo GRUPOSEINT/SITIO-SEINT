@@ -88,7 +88,9 @@ correo web. Para volver atrás: marcar "Habilitar versiones deprecadas", elegir 
 ## Las cotizaciones
 
 - Cada cotización llega a **contacto@seintsas.com**. Con **Responder** le contestas al cliente.
-- Además queda una copia en la carpeta `seint-privado` (raíz del hosting, fuera de `public_html`),
-  un archivo por mes: `cotizaciones-AAAA-MM.csv`, que se abre con Excel. Es la prueba de que cada
+- Además queda una copia en `public_html/cotizar/_privado/`, un archivo por mes:
+  `cotizaciones-AAAA-MM.csv`, que se abre con Excel (descárgalo desde el Administrador de archivos).
+  El hosting no deja escribir fuera de `public_html`, así que la carpeta está bloqueada para internet
+  (comprobado el 15-10-2026: la dirección responde "Forbidden"). Es la prueba de que cada
   persona autorizó el tratamiento de sus datos. **No la borres ni la compartas.**
 - Si un correo no llegó, la columna `correo_enviado` del CSV dice `no`.
