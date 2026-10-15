@@ -22,12 +22,31 @@ RewriteEngine On
 #RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 #RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
 
+# --- Otros dominios de SEINT apuntados a este hosting ------------------------------
+# Cada uno lleva a su sección en seintsas.com (decisión de SEINT, octubre 2026).
+RewriteCond %{HTTP_HOST} ^(www\.)?capacitacionenalturas\.com$ [NC]
+RewriteRule ^ https://seintsas.com/trabajo-en-alturas [R=301,L]
+RewriteCond %{HTTP_HOST} ^(www\.)?seintsalud\.com$ [NC]
+RewriteRule ^ https://seintsas.com/medicina-ocupacional [R=301,L]
+
 # --- Redirecciones 301 del sitio anterior ------------------------------------------
 # Fuente: sitemap.xml del sitio anterior (11 páginas, última actualización 2021).
 RewriteRule ^(cursos|programas-de-capacitacion)\.html$ /trabajo-en-alturas [R=301,L]
 RewriteRule ^(ips|medico-ocupacional|paraclinicos|examenes-tsa)\.html$ /medicina-ocupacional [R=301,L]
 RewriteRule ^(otros-servicios|nosotros|preguntas-frecuentes)\.html$ / [R=301,L]
 RewriteRule ^contactanos\.html$ /cotizar [R=301,L]
+# Páginas del sitio anterior que no estaban en su sitemap.
+RewriteRule ^(noticias|comunicados)\.html$ /blog [R=301,L]
+RewriteRule ^covid-19\.html$ / [R=301,L]
+RewriteRule ^sitemap\.xml$ /sitemap-index.xml [R=301,L]
+
+# Carpetas viejas que se archivaron fuera de la carpeta pública (solo si ya no existen).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^cursos(/.*)?$ /trabajo-en-alturas [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(cencosud|antigua|nuevaweb|demo)(/.*)?$ / [R=301,L]
 
 # PDF de cursos del sitio anterior (cada uno abre su rol ya desplegado).
 # "Avanzado" era el nivel de la Res. 1409/2012 que hoy equivale a trabajador autorizado (Res. 4272/2021).
