@@ -8,7 +8,9 @@ import Photo from '../components/Photo.astro';
 import { LINKS, cotizarHref, waHref } from '../data/sitio';
 import contadores from '../data/contadores.json';
 
-const cifra = (n: number) => n.toLocaleString('es-CO') + '+';
+import { diasHabiles, hoyBogota, cifra } from '../data/cifras';
+const dias = diasHabiles(contadores.actualizado, hoyBogota());
+const estimado = (k: 'trabajadores_certificados' | 'pacientes_atendidos') => contadores[k] + dias * contadores.por_dia_habil[k];
 const cursos = [
   'Rescate vertical', 'Certificación de punto de anclaje', 'Riesgo eléctrico', 'Primeros auxilios',
   'Manejo de montacargas', 'Andamiaje', 'Seguridad vial organizacional',
@@ -43,8 +45,8 @@ const cursos = [
   <section class="stats px">
     <div class="container grid-auto" style="--min:230px;gap:24px 32px">
       <StatBlock value="17+" label="Años de bienestar" />
-      <StatBlock value={cifra(contadores.trabajadores_certificados)} label="Trabajadores certificados" />
-      <StatBlock value={cifra(contadores.pacientes_atendidos)} label="Pacientes atendidos" />
+      <StatBlock value={cifra(estimado('trabajadores_certificados'))} label="Trabajadores certificados" contador={{ base: contadores.trabajadores_certificados, porDia: contadores.por_dia_habil.trabajadores_certificados, desde: contadores.actualizado }} />
+      <StatBlock value={cifra(estimado('pacientes_atendidos'))} label="Pacientes atendidos" contador={{ base: contadores.pacientes_atendidos, porDia: contadores.por_dia_habil.pacientes_atendidos, desde: contadores.actualizado }} />
       <StatBlock value="3 horas" label="Resultados de laboratorio" />
     </div>
   </section>

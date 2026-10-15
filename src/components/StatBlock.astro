@@ -1,11 +1,26 @@
 ---
-interface Props { value: string; label: string }
-const { value, label } = Astro.props;
+// `contador`: cifra que crece por día de lunes a sábado (ver src/data/cifras.ts). El HTML trae
+// la cifra del día de publicación y el script la pone al día en el navegador.
+interface Props { value: string; label: string; contador?: { base: number; porDia: number; desde: string } }
+const { value, label, contador } = Astro.props;
 ---
 <div>
-  <div class="stat-value">{value}</div>
+  <div class="stat-value" data-contador={contador ? JSON.stringify(contador) : undefined}>{value}</div>
   <div class="stat-label">{label}</div>
 </div>
+<script>
+  const hoy = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+  const fin = Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  document.querySelectorAll<HTMLElement>('[data-contador]').forEach((el) => {
+    try {
+      const { base, porDia, desde } = JSON.parse(el.dataset.contador!);
+      const [a, m, d] = desde.split('-').map(Number);
+      let dias = 0;
+      for (let t = Date.UTC(a, m - 1, d) + 86400000; t <= fin; t += 86400000) if (new Date(t).getUTCDay() !== 0) dias++;
+      el.textContent = (base + dias * porDia).toLocaleString('es-CO') + '+';
+    } catch { /* se queda la cifra del HTML */ }
+  });
+</script>
 <style>
   .stat-value { font-family: var(--font-display); font-weight: var(--weight-black); font-size: var(--size-display); line-height: var(--leading-tight); color: var(--brand-primary); }
   .stat-label { margin-top: var(--space-2); font-size: var(--size-small); letter-spacing: var(--tracking-wide); text-transform: uppercase; font-weight: var(--weight-semibold); color: var(--navy-500); }

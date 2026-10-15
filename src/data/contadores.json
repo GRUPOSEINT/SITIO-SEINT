@@ -1,5 +1,9 @@
 {
   "trabajadores_certificados": 100000,
   "pacientes_atendidos": 60500,
-  "actualizado": "2026-09-29"
+  "actualizado": "2026-09-29",
+  "por_dia_habil": {
+    "trabajadores_certificados": 25,
+    "pacientes_atendidos": 25
+  }
 }
