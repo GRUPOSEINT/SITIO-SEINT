@@ -78,6 +78,8 @@ contenido de `sitio-anterior-muse`. El sitio viejo vuelve en el acto. El correo 
 seintsas.com ya tiene certificado (Sectigo, vence el **25 de marzo de 2027**; hay que renovarlo
 antes en DonWeb). En *Dominios → Dominios*, enciende **"Redirección https"** en la fila de
 seintsas.com y comprueba que la página abre con candado.
+**Hecho el 16-10-2026** (interruptor encendido y candado comprobado). Por eso las 5 líneas de
+https del `.htaccess` siguen comentadas: no hacen falta y duplicarían la redirección.
 
 ### Subir a PHP 8 (una semana después)
 Con los programas viejos archivados (Paso 2), el único PHP del sitio es `cotizar/enviar.php`, que
