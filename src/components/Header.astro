@@ -27,7 +27,7 @@ const accesos = [
         {a.icon && <Icon name={a.icon} size={14} />}{a.label}
       </a>
     ))}
-    <a class="only-wide topbar-link" href="/pagos"><span class="breb">Pagos Bre-B - Llave</span></a>
+    <a class="only-wide topbar-link" href="/pagos"><span class="breb">Pagos</span></a>
 
     <div class="only-tablet accesos" data-accesos>
       <button type="button" class="accesos-btn" aria-expanded="false" aria-controls="accesos-menu" data-accesos-toggle>
@@ -37,7 +37,7 @@ const accesos = [
         {accesos.map((a) => (
           <a href={a.href} target="_blank" rel="noopener">{a.icon && <Icon name={a.icon} size={14} />} {a.label}</a>
         ))}
-        <a href="/pagos"><span class="breb">Pagos Bre-B - Llave</span></a>
+        <a href="/pagos"><span class="breb">Pagos</span></a>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@ const accesos = [
     {accesos.map((a) => (
       <a href={a.href} target="_blank" rel="noopener" class="mm-sub">{a.icon && <Icon name={a.icon} size={16} />} {a.label}</a>
     ))}
-    <a href="/pagos" class="mm-sub mm-last"><span class="breb" style="color:var(--teal-700)">Pagos Bre-B - Llave</span></a>
+    <a href="/pagos" class="mm-sub mm-last"><span class="breb" style="color:var(--teal-700)">Pagos</span></a>
   </nav>
 </header>
 

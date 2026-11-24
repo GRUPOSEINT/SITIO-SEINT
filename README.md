@@ -19,7 +19,7 @@ npm run paquete  # build + paquetes/sitio-seint-AAAA-MM-DD-HHMM.zip para subir a
 | `/trabajo-en-alturas`, `/espacios-confinados` | `src/components/PaginaFormacion.astro` + roles en `src/data/roles.ts` |
 | `/medicina-ocupacional` | `src/pages/medicina-ocupacional.astro` |
 | `/cotizar`, `/cotizar/gracias` | `src/pages/cotizar/` + `src/scripts/cotizar.ts`; recibe `public/cotizar/enviar.php` |
-| `/pagos` | Bre-B: QR y llave |
+| `/pagos` | Pagos: cuenta de ahorros Banco Caja Social |
 | `/politica-de-datos`, `/politica-de-cookies` | texto en `src/legal/*.html` |
 | `/blog`, `/blog/[slug]` | artículos en `src/content/blog/*.md` |
 | `/acceso-a-empresas` | iframe de Biofile (pestaña nueva) |

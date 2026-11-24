@@ -1,29 +1,43 @@
 ---
 import Base from '../layouts/Base.astro';
+import { SITIO } from '../data/sitio';
+
+// Cuenta para pagos (definida por SEINT, noviembre 2026). Reemplaza la llave Bre-B.
+const CUENTA = { banco: 'Banco Caja Social', tipo: 'Cuenta de ahorros', numero: '24159927281' };
+const datos = [
+  ['Banco', CUENTA.banco],
+  ['Tipo de cuenta', CUENTA.tipo],
+  ['Titular', SITIO.razonSocial],
+  ['NIT', SITIO.nit],
+];
 ---
-<Base title="Pagos Bre-B · Grupo Empresarial SEINT" description="Paga desde la app de tu banco con el código QR o la llave Bre-B 0090963153.">
+<Base title="Pagos · Grupo Empresarial SEINT" description={`Paga por transferencia a la cuenta de ahorros ${CUENTA.banco} ${CUENTA.numero} a nombre de SEINT SAS.`}>
 <main class="px" style="padding-top:clamp(40px,6vw,88px);padding-bottom:clamp(40px,6vw,88px)">
-  <div class="grid-auto" style="--min:280px;max-width:720px;margin:0 auto;gap:clamp(24px,4vw,48px);align-items:center">
-    <div>
-      <a href="/" style="font-size:14px">← Inicio</a>
-      <div class="overline" style="margin-top:20px"><span>Pagos Bre-B</span></div>
-      <h1 class="display" style="font-size:clamp(28px,4vw,42px);line-height:1.1;margin:24px 0 12px;letter-spacing:0">Paga desde la app de tu banco</h1>
-      <p style="margin:0;font-size:17px;line-height:1.6">Escanea el código QR o ingresa la llave en la app de tu banco. El pago llega al instante a Seint Alturas Servicios Especializados.</p>
-      <div style="margin-top:24px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:16px 20px">
-        <div class="label">Llave Bre-B</div>
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px">
-          <span style="font-family:var(--font-display);font-weight:800;font-size:32px;color:var(--navy-500);letter-spacing:.04em" data-llave>0090963153</span>
-          <button type="button" class="btn btn--ghost btn--sm" data-copiar>Copiar</button>
-        </div>
+  <div style="max-width:620px;margin:0 auto">
+    <a href="/" style="font-size:14px">← Inicio</a>
+    <div class="overline" style="margin-top:20px"><span>Pagos</span></div>
+    <h1 class="display" style="font-size:clamp(28px,4vw,42px);line-height:1.1;margin:24px 0 12px;letter-spacing:0">Paga por transferencia</h1>
+    <p style="margin:0;font-size:17px;line-height:1.6">Desde la app o la sucursal virtual de tu banco, transfiere a esta cuenta:</p>
+
+    <div style="margin-top:24px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px 24px">
+      <div class="label">Número de cuenta</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px">
+        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(26px,5vw,32px);color:var(--navy-500);letter-spacing:.04em" data-cuenta>{CUENTA.numero}</span>
+        <button type="button" class="btn btn--ghost btn--sm" data-copiar>Copiar</button>
       </div>
+      <dl style="margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:8px 20px;font-size:16px">
+        {datos.map(([k, v]) => (<><dt style="color:var(--gray-500)">{k}</dt><dd style="margin:0;font-weight:600">{v}</dd></>))}
+      </dl>
     </div>
-    <img src="/assets/qr-breb.png" alt="Código QR de pago Bre-B, llave 0090963153" width="718" height="1280" style="width:100%;height:auto;max-width:340px;justify-self:center;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)" />
+
+    <p style="margin:24px 0 0;font-size:16px;line-height:1.6">Después de pagar, envía el comprobante por <a href={`https://wa.me/${SITIO.whatsapp}`} target="_blank" rel="noopener">WhatsApp al {SITIO.telComercial}</a> o a <a href={`mailto:${SITIO.correo}`}>{SITIO.correo}</a>, con el nombre de la persona o empresa.</p>
   </div>
 </main>
 </Base>
 <script>
   const b = document.querySelector<HTMLButtonElement>('[data-copiar]');
+  const n = document.querySelector<HTMLElement>('[data-cuenta]');
   b?.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText('0090963153'); b.textContent = 'Copiada'; setTimeout(() => (b.textContent = 'Copiar'), 2000); } catch { /* el número sigue visible */ }
+    try { await navigator.clipboard.writeText(n?.textContent ?? ''); b.textContent = 'Copiado'; setTimeout(() => (b.textContent = 'Copiar'), 2000); } catch { /* el número sigue visible */ }
   });
 </script>
